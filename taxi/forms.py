@@ -22,7 +22,6 @@ class DriverLicenseUpdateForm(forms.ModelForm):
         model = Driver
         fields = ["license_number"]
 
-
     def clean_license_number(self):
         license_number = self.cleaned_data["license_number"]
         pattern = r"^[A-Z]{3}\d{5}$"
@@ -41,4 +40,3 @@ class CarForm(forms.ModelForm):
         widgets = {
             "drivers": forms.CheckboxSelectMultiple(),
         }
-
