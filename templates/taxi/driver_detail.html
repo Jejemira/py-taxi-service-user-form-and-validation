@@ -3,7 +3,20 @@
 {% block content %}
   <h1>
     Username: {{ driver.username }}
+      <a href="{% url 'taxi:driver-license-update' driver.pk %}" class="btn btn-warning">Update License</a>
+      <a href="{% url 'taxi:driver-delete' driver.pk %}" class="btn btn-danger">Delete Driver</a>
   </h1>
+  {% if is_driver %}
+    <form method="post" action="{% url 'taxi:remove-from-car' car.pk %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Delete me from this car</button>
+    </form>
+  {% else %}
+    <form method="post" action="{% url 'taxi:add-to-car' car.pk %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success">Assign me to this car</button>
+    </form>
+  {% endif %}
 
   <p><strong>First name:</strong> {{ driver.first_name }}</p>
   <p><strong>Last name:</strong> {{ driver.last_name }}</p>
